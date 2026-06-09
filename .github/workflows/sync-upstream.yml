@@ -2,7 +2,7 @@ name: Sync upstream and rebuild
 
 on:
   schedule:
-    - cron: '0 4 * * *'  # runs daily at 4am UTC
+    - cron: '0 4 * * *'
   workflow_dispatch:
 
 jobs:
@@ -10,6 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+      workflows: write
 
     steps:
       - name: Checkout fork
@@ -17,7 +18,7 @@ jobs:
         with:
           ref: main
           fetch-depth: 0
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.PAT_TOKEN }}
 
       - name: Add upstream remote
         run: |
